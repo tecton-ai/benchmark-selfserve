@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import hashlib
+import os
 
-
+OUT_FILE = 'feature_services.py'
 
 header =  """from tecton import FileConfig, BatchSource, Entity, batch_feature_view
 
@@ -199,11 +200,13 @@ def main():
                 fs[i].append(feature_name)
                 feature_view_num += 1
 
+    all_feature_services = []
     for i in range(4):
         features = fs[i]
         if i > 0:
             fs[i] += fs[i-1]
         name = f"load_test_feature_service_mixed_{len(features)}_feature_views"
+        all_feature_services.append(name)
         code += gen_feature_service(name, features)
     for i in range(4,8):
         features = fs[i-4]
@@ -212,8 +215,22 @@ def main():
             if "load_test_lifetime" in feature:
                 tfv_features.append(feature)
         name = f"load_test_feature_service_non_aggregate_{len(tfv_features)}_feature_views"
+        all_feature_services.append(name)
         code += gen_feature_service(name, tfv_features)
-    open('feature_services.py', 'w').write(code)
+
+    fs_names = "\n".join([f'    "{fs_name}",' for fs_name in all_feature_services])
+    code += f"""
+ALL_FEATURE_SERVICES = [
+{fs_names}
+]
+    """
+
+    try:
+        os.remove(OUT_FILE)
+    except:
+        pass
+
+    open(OUT_FILE, 'w').write(code)
 
 
 if __name__ == '__main__':

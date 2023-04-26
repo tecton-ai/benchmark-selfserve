@@ -12,7 +12,15 @@ to apply the changes to your cluster:
     - If you need to create the workspace, run `tecton workspace create --live <workspace>`
 3. `cd` to this repo then run `tecton apply` to apply the Feature Services in `feature_services.py`
 
+`tecton apply` starts materialization, which can take a while to finish. You can check the status in the web UI:
+1. Ensure your new workspace is selected near the top left via the drop-down
+2. Click Services on the left
+3. Click a service
+4. Click the Materialization tab (to the right of the Overview tab that's selected by default)
+
 ## What's In This Repo
+The empty `.tecton` file is just so you don't have to run `tecton init`.
+
 `gen_test_features.py` generates `feature_services.py`, which defines a few things:
 
 ### Data Source
