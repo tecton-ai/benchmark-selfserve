@@ -4,12 +4,12 @@ from pathlib import Path
 from typing import Any, Dict, List
 from base64 import b64encode
 import json
+import os
 
 from feature_services import ALL_FEATURE_SERVICES
 
 
 JK_DIR = Path(__file__).parent / "join_keys"
-JK_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def req_params(fs_name: str, ws_name: str, jk_map: Dict[str, str]) -> Dict[str, Any]:
@@ -37,11 +37,23 @@ def get_b64_requests(api_url: str, ws_name: str, fs_name: str, jk_maps) -> List[
     return
 
 
+def clean_jk_dir():
+    try:
+        JK_DIR.mkdir(parents=True, exist_ok=True)
+        for jk_file in JK_DIR.iterdir():
+            os.remove(jk_file)
+        os.rmdir(JK_DIR)
+    except:
+        pass
+    JK_DIR.mkdir(parents=True, exist_ok=True)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("cluster_url", type=str, help="Tecton cluster URL")
     parser.add_argument("ws_name", type=str, help="Workspace name")
     args = parser.parse_args()
+    api_url = f"https://{args.cluster_url}/api/v1/feature-service/get-features"
 
     values = list(range(1, 51))
     jk_maps = [
@@ -54,7 +66,7 @@ def main():
     ]
     print(f"{len(jk_maps)} join-key maps")
 
-    api_url = f"{args.cluster_url}/api/v1/feature-service/get-features"
+    clean_jk_dir()
 
     for fs_name in ALL_FEATURE_SERVICES:
         b64_requests = [web_req_with_b64_body(api_url, fs_name, args.ws_name, jk_map) for jk_map in jk_maps]

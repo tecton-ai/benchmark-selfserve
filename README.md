@@ -5,6 +5,11 @@ Clone this repository and follow the instructions to benchmark Tecton
 `feature_services.py` already exists, but if you want to make changes to how it's generated,
 you can modify `gen_test_features.py` then run it to re-generate `feature_services.py`
 
+### Requirements
+* Python 3
+* [Vegeta](https://github.com/tsenart/vegeta) installed and in the path
+
+### 1. Apply the Repo
 Once you're happy with the Feature Services in `feature_services.py`, do the following
 to apply the changes to your cluster:
 1. `tecton login <url>` to log into your cluster
@@ -17,6 +22,19 @@ to apply the changes to your cluster:
 2. Click Services on the left
 3. Click a service
 4. Click the Materialization tab (to the right of the Overview tab that's selected by default)
+
+### 2. Generate Join Keys
+In order to generate the join key maps that compose the get-features requests, you need to run the `gen_join_keys` script like so:
+```
+./gen_join_keys.py <url> <workspace>
+```
+
+This populates the files in the `join_keys` directory, each one representing a list of requests that will be sent to the feature services by Vegeta.
+
+
+### 3. Run Vegeta
+Asdf
+
 
 ## What's In This Repo
 The empty `.tecton` file is just so you don't have to run `tecton init`.
@@ -39,25 +57,25 @@ test_datasource = BatchSource(
 ```
 
 ### Feature Services
-- `load_test_feature_service_non_aggregate_1_feature_views`
-    - 1 non-aggregate feature view in the feature service
-- `load_test_feature_service_non_aggregate_2_feature_views`
-    - 2 non-aggregate feature view in the feature service
-- `load_test_feature_service_non_aggregate_4_feature_views`
-    - 4 non-aggregate feature view in the feature service
-- `load_test_feature_service_non_aggregate_14_feature_views`
-    - 14 non-aggregate feature view in the feature service
-- `load_test_feature_service_mixed_5_feature_views`
-    - 5 feature views in the feature service
+- `fs_non_aggregate_1_feature_views`
+    - 1 non-aggregate feature view
+- `fs_non_aggregate_2_feature_views`
+    - 2 non-aggregate feature view
+- `fs_non_aggregate_4_feature_views`
+    - 4 non-aggregate feature view
+- `fs_non_aggregate_14_feature_views`
+    - 14 non-aggregate feature view
+- `fs_mixed_5_feature_views`
+    - 5 feature views
     - N aggregate and M non-aggregate feature views
-- `load_test_feature_service_mixed_10_feature_views`
-    - 10 feature views in the feature service
+- `fs_mixed_10_feature_views`
+    - 10 feature views
     - N aggregate and M non-aggregate feature views
-- `load_test_feature_service_mixed_18_feature_views`
-    - 18 feature views in the feature service
+- `fs_mixed_18_feature_views`
+    - 18 feature views
     - N aggregate and M non-aggregate feature views
-- `load_test_feature_service_mixed_58_feature_views`
-    - 58 feature views in the feature service
+- `fs_mixed_58_feature_views`
+    - 58 feature views
     - N aggregate and M non-aggregate feature views
 
 ### Join Keys

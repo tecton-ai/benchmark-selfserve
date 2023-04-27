@@ -200,12 +200,13 @@ def main():
                 fs[i].append(feature_name)
                 feature_view_num += 1
 
+    fs_prefix = "fs"
     all_feature_services = []
     for i in range(4):
         features = fs[i]
         if i > 0:
             fs[i] += fs[i-1]
-        name = f"load_test_feature_service_mixed_{len(features)}_feature_views"
+        name = f"{fs_prefix}_mixed_{len(features)}_feature_views"
         all_feature_services.append(name)
         code += gen_feature_service(name, features)
     for i in range(4,8):
@@ -214,7 +215,7 @@ def main():
         for feature in features:
             if "load_test_lifetime" in feature:
                 tfv_features.append(feature)
-        name = f"load_test_feature_service_non_aggregate_{len(tfv_features)}_feature_views"
+        name = f"{fs_prefix}_non_aggregate_{len(tfv_features)}_feature_views"
         all_feature_services.append(name)
         code += gen_feature_service(name, tfv_features)
 
