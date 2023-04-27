@@ -51,8 +51,10 @@ def main():
     args = parser.parse_args()
     api_url = f"https://{args.cluster_url}/api/v1/feature-service/get-features"
 
+
+
     values = list(range(1, 51))
-    jk_maps = [
+    mixed_jk_maps = [
         {
             "cust_id": str(val1),
             "merchant_id": str(val2),
@@ -60,10 +62,19 @@ def main():
        for val1 in values
        for val2 in values
     ]
-    print(f"Generated {len(jk_maps)} distinct requests per feature service")
+    nonaggregate_jk_maps = [
+        {
+            "cust_id": str(val),
+        }
+        for val in values
+    ]
 
     clean_reqs_dir()
     for fs_name in ALL_FEATURE_SERVICES:
+        if "mixed" in fs_name:
+            jk_maps = mixed_jk_maps
+        else:
+            jk_maps = nonaggregate_jk_maps
         b64_requests = [web_req_with_b64_body(api_url, fs_name, args.ws_name, jk_map) for jk_map in jk_maps]
         fs_file = REQS_DIR / fs_name
         fs_file.write_text("\n".join(b64_requests))

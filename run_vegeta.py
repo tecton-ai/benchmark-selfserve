@@ -57,6 +57,8 @@ def main():
     parser.add_argument("-f", "--file", help=f"If set, output to a file in {VEGET_OUT_FOLDERNAME}", action="store_true", default=False)
     args = parser.parse_args()
 
+    print(f"Running Vegeta against {args.service}...")
+
     # Check for API key
     api_key = ReqUtil._tecton_api_key()
 
@@ -89,6 +91,8 @@ def main():
         cmd_report.append(f"--output={out_file}")
 
     ReqUtil.shell_pipe(cmd_attack, cmd_report)
+
+    print(f"Done running Vegeta against {args.service}!")
 
 
 if __name__ == '__main__':

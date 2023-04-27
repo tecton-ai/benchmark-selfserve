@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
 import hashlib
 import os
+from pathlib import Path
+import stat
 
-OUT_FILE = 'feature_services.py'
+OUT_FILE = Path(__file__).parent / 'feature_services.py'
+RUN_SCRIPT = Path(__file__).parent / 'run_vegeta_all.sh'
+
+N_MIXED_FS = 3
+
 
 header =  """from tecton import FileConfig, BatchSource, Entity, batch_feature_view
 
@@ -141,13 +147,10 @@ def main():
 
     feature_view_num = 0
 
+
     fs = {
-        0: [],
-        1: [],
-        2: [],
-        3: [],
-        4: [],
-        5: []
+        i: []
+        for i in range(2*N_MIXED_FS)
     }
 
     code = header
@@ -200,15 +203,15 @@ def main():
 
     fs_prefix = "fs"
     all_feature_services = []
-    for i in range(3):
+    for i in range(N_MIXED_FS):
         features = fs[i]
         if i > 0:
             fs[i] += fs[i-1]
         name = f"{fs_prefix}_mixed_{len(features)}_feature_views"
         all_feature_services.append(name)
         code += gen_feature_service(name, features)
-    for i in range(3,6):
-        features = fs[i-3]
+    for i in range(N_MIXED_FS, N_MIXED_FS*2):
+        features = fs[i-N_MIXED_FS]
         tfv_features = []
         for feature in features:
             if "load_test_lifetime" in feature:
@@ -228,8 +231,30 @@ ALL_FEATURE_SERVICES = [
         os.remove(OUT_FILE)
     except:
         pass
+    try:
+        os.remove(RUN_SCRIPT)
+    except:
+        pass
 
-    open(OUT_FILE, 'w').write(code)
+    OUT_FILE.write_text(code)
+
+    script_lines = "\n".join([
+        f"./run_vegeta.py --service {fs_name} --file -r 5 -d 10 -t 5000 &" for fs_name in all_feature_services
+    ])
+
+    # Now codegen the run-all script
+    script = f"""#!/bin/sh
+
+#
+# Use this as a "workspace" to loadtest multiple services as the same time,
+# or just as a reference to paste line(s) into your console.
+#
+
+{script_lines}
+
+"""
+    RUN_SCRIPT.write_text(script)
+    RUN_SCRIPT.chmod(RUN_SCRIPT.stat().st_mode | stat.S_IEXEC)
 
 
 if __name__ == '__main__':

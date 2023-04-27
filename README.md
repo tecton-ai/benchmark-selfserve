@@ -4,7 +4,7 @@ Clone this repository and follow the instructions to benchmark Tecton
 ## What's In This Repo
 The empty `.tecton` file is just so you don't have to run `tecton init`.
 
-`gen_test_features.py` generates `feature_services.py`, which defines a few things:
+`gen_feature_services.py` generates `feature_services.py`, which defines a few things:
 
 ### Data Source
 Parquet file on S3 that's available in a public bucket (any cluster/person can access the data)
@@ -28,8 +28,6 @@ test_datasource = BatchSource(
     - 2 non-aggregate feature view
 - `fs_non_aggregate_4_feature_views`
     - 4 non-aggregate feature view
-- `fs_non_aggregate_14_feature_views`
-    - 14 non-aggregate feature view
 - `fs_mixed_5_feature_views`
     - 5 feature views
     - N aggregate and M non-aggregate feature views
@@ -39,9 +37,6 @@ test_datasource = BatchSource(
 - `fs_mixed_18_feature_views`
     - 18 feature views
     - N aggregate and M non-aggregate feature views
-- `fs_mixed_58_feature_views`
-    - 58 feature views
-    - N aggregate and M non-aggregate feature views
 
 ### Join Keys
 * `cust_id` 1 through 50
@@ -49,7 +44,7 @@ test_datasource = BatchSource(
 
 # How-to
 `feature_services.py` already exists, but if you want to make changes to how it's generated,
-you can modify `gen_test_features.py` then run it to re-generate `feature_services.py`.
+you can modify `gen_feature_services.py` then run it to re-generate `feature_services.py`.
 
 ## Requirements
 * Python 3
@@ -89,17 +84,12 @@ This populates the `requests` directory where each file represents a feature ser
 ## 3. Run Vegeta
 To load a feature service (default is the first one), run:
 ```
-./run_vegeta.py
+./run_vegeta.py -s <feature_service>
 ```
 You can also specify the RPS, duration, timeout, and feature service name.
+The `--file` flag tells it to output to a file whose name is the same as the service name, in the `vegeta_out` directory.
 
-Here's a quick little script to load tests for all services at once:
-```
-REQ_FILES=$(ls requests)
-for REQ_FILE in $(echo $REQ_FILES); do
-    ./run_vegeta.py --service $REQ_FILE --file &
-done
-```
+You can optionally run the `run_vegeta_all.sh` script to test some or all of the feature services at the same time, or just use it as a reference to copy and paste `./run_vegeta.py` commands into your console.
 
 Big red button to kill all vegeta load tests:
 ```
