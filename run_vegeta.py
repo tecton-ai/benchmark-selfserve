@@ -50,8 +50,8 @@ def main():
         raise Exception(f"No request files in {REQS_DIR}. Run `gen_requests.py` first.")
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-r", "--rps", type=int, help="Requests per second", default=100)
-    parser.add_argument("-d", "--duration", type=int, help="Duration (in seconds)", default=60)
+    parser.add_argument("-r", "--rps", type=int, help="Requests per second", default=5)
+    parser.add_argument("-d", "--duration", type=int, help="Duration (in seconds)", default=10)
     parser.add_argument("-t", "--timeout", type=int, help="Timeout (in miliseconds)", default=5000)
     parser.add_argument("-s", "--service", type=str, help="Feature Service", default=req_filenames[0], choices=req_filenames)
     parser.add_argument("-f", "--file", help=f"If set, output to a file in {VEGET_OUT_FOLDERNAME}", action="store_true", default=False)

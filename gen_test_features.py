@@ -147,9 +147,7 @@ def main():
         2: [],
         3: [],
         4: [],
-        5: [],
-        6: [],
-        7: []
+        5: []
     }
 
     code = header
@@ -202,15 +200,15 @@ def main():
 
     fs_prefix = "fs"
     all_feature_services = []
-    for i in range(4):
+    for i in range(3):
         features = fs[i]
         if i > 0:
             fs[i] += fs[i-1]
         name = f"{fs_prefix}_mixed_{len(features)}_feature_views"
         all_feature_services.append(name)
         code += gen_feature_service(name, features)
-    for i in range(4,8):
-        features = fs[i-4]
+    for i in range(3,6):
+        features = fs[i-3]
         tfv_features = []
         for feature in features:
             if "load_test_lifetime" in feature:
