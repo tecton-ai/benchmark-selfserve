@@ -1,5 +1,8 @@
-join_keys
-join_keys/**
+requests
+requests/**
+
+vegeta_out
+vegeta_out/**
 
 __pycache__
 __pycache__/**

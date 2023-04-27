@@ -3,13 +3,13 @@ Clone this repository and follow the instructions to benchmark Tecton
 
 ## Quick Start Guide
 `feature_services.py` already exists, but if you want to make changes to how it's generated,
-you can modify `gen_test_features.py` then run it to re-generate `feature_services.py`
+you can modify `gen_test_features.py` then run it to re-generate `feature_services.py`.
 
 ### Requirements
 * Python 3
 * [Vegeta](https://github.com/tsenart/vegeta) installed and in the path
 
-### 1. Apply the Repo
+### 1. Workspace Setup
 Once you're happy with the Feature Services in `feature_services.py`, do the following
 to apply the changes to your cluster:
 1. `tecton login <url>` to log into your cluster
@@ -23,17 +23,42 @@ to apply the changes to your cluster:
 3. Click a service
 4. Click the Materialization tab (to the right of the Overview tab that's selected by default)
 
-### 2. Generate Join Keys
-In order to generate the join key maps that compose the get-features requests, you need to run the `gen_join_keys` script like so:
+**IMPORTANT**: Set the environment variable `TECTON_API_KEY` to the API Key of a Tecton user (may be a service user), and add that user as a Consumer of your bench workspace:
+1. Go to the Tecton web UI
+2. Click "Accounts & Access" on the left
+3. Find the user associated with the `TECTON_API_KEY` and click on them
+4. Click "Assign Workspace Access"
+5. Select your bench workspace and click the "Consumer" role
+6. Click "Add" in the bottom right
+
+### 2. Generate Requests
+In order to generate the requests thatwill be sent to the get-features API, you need to run the `gen_requests` script like so:
 ```
-./gen_join_keys.py <url> <workspace>
+./gen_requests.py <url> <workspace>
 ```
 
-This populates the files in the `join_keys` directory, each one representing a list of requests that will be sent to the feature services by Vegeta.
+This populates the `requests` directory, each file representing a feature service's list of requests that will be sent by Vegeta.
 
 
 ### 3. Run Vegeta
-Asdf
+To load a feature service (default is the first one), run:
+```
+./run_vegeta.py`
+```
+You can also specify the RPS, duration, timeout, and feature service name.
+
+Here's a quick little script to load tests for all services at once:
+```
+REQ_FILES=$(ls requests)
+for REQ_FILE in $(echo $REQ_FILES); do
+    ./run_vegeta.py --service $REQ_FILE --file &
+done
+```
+
+Big red button to kill all vegeta load tests:
+```
+ps aux | grep vegeta | awk '{print $2}' | xargs kill
+```
 
 
 ## What's In This Repo
@@ -79,5 +104,5 @@ test_datasource = BatchSource(
     - N aggregate and M non-aggregate feature views
 
 ### Join Keys
-* `customer_id` 1 through 50
+* `cust_id` 1 through 50
 * `merchant_id` 1 through 50
