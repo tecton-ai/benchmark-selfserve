@@ -1,7 +1,7 @@
 # benchmark-selfserve
 Clone this repository and follow the instructions to benchmark Tecton
 
-## Quick Start Guide
+## How-to
 `feature_services.py` already exists, but if you want to make changes to how it's generated,
 you can modify `gen_test_features.py` then run it to re-generate `feature_services.py`.
 
@@ -37,13 +37,13 @@ In order to generate the requests thatwill be sent to the get-features API, you 
 ./gen_requests.py <url> <workspace>
 ```
 
-This populates the `requests` directory, each file representing a feature service's list of requests that will be sent by Vegeta.
+This populates the `requests` directory where each file represents a feature service's requests that will be sent by Vegeta.
 
 
 ### 3. Run Vegeta
 To load a feature service (default is the first one), run:
 ```
-./run_vegeta.py`
+./run_vegeta.py
 ```
 You can also specify the RPS, duration, timeout, and feature service name.
 
