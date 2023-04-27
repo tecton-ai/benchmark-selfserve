@@ -102,7 +102,7 @@ With 100 RPS, this is what we got (abbreviating the feature server names):
 All values are in KiB:
 | Feature Service | p50 | p90 | p95 | p99 |
 | --------------- | --- | --- | --- | --- |
-| `mixed_10` | 0.729 | 0.927 | 0.952 | 0.972 |
+| `mixed_5`  | 0.729 | 0.927 | 0.952 | 0.972 |
 | `mixed_10` | 1.46 | 1.86 | 1.90 | 1.94 |
 | `mixed_18` | 3.41 | 4.59 | 4.74 | 4.85 |
 | `nonagg_1` | 0.732 | 0.928 | 0.952 | 0.972 |
@@ -113,7 +113,7 @@ All values are in KiB:
 All values are in ms:
 | Feature Service | p50 | p90 | p95 | p99 |
 | --------------- | --- | --- | --- | --- |
-| `mixed_10` | 5.67 | 10.5 | 17.0 | 40.9 |
+| `mixed_5`  | 5.67 | 10.5 | 17.0 | 40.9 |
 | `mixed_10` | 8.27 | 18.8 | 28.6 | 54.5 |
 | `mixed_18` | 13.3 | 28.7 | 39.1 | 105 |
 | `nonagg_1` | 4.09 | 6.17 | 7.94 | 18.8 |
