@@ -30,13 +30,13 @@ test_datasource = BatchSource(
     - 4 non-aggregate feature view
 - `fs_mixed_5_feature_views`
     - 5 feature views
-    - N aggregate and M non-aggregate feature views
+    - 4 aggregate and 1 non-aggregate feature views
 - `fs_mixed_10_feature_views`
     - 10 feature views
-    - N aggregate and M non-aggregate feature views
+    - 8 aggregate and 2 non-aggregate feature views
 - `fs_mixed_18_feature_views`
     - 18 feature views
-    - N aggregate and M non-aggregate feature views
+    - 14 aggregate and 4 non-aggregate feature views
 
 ### Join Keys
 * `cust_id` 1 through 50
@@ -82,12 +82,11 @@ This populates the `requests` directory where each file represents a feature ser
 
 
 ## 3. Run Vegeta
-To load a feature service (default is the first one), run:
+To load a feature service, run:
 ```
 ./run_vegeta.py -s <feature_service>
 ```
-You can also specify the RPS, duration, timeout, and feature service name.
-The `--file` flag tells it to output to a file whose name is the same as the service name, in the `vegeta_out` directory.
+You can also specify the RPS (`-r`), duration (`-d`), and timeout (`-t`). The `--file` flag tells it to output to a file whose name is the same as the service name, in the `vegeta_out` directory.
 
 You can optionally run the `run_vegeta_all.sh` script to test some or all of the feature services at the same time, or just use it as a reference to copy and paste `./run_vegeta.py` commands into your console.
 
