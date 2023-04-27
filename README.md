@@ -96,7 +96,7 @@ ps aux | grep vegeta | awk '{print $2}' | xargs kill
 ```
 
 # Metrics
-With 100 RPS, this is what we got (abbreviating the feature server names):
+Note that Dynamo is the online store. With 100 RPS, this is what we got (abbreviating the feature server names):
 
 ## Response Size Per Query
 All values are in KiB:
@@ -115,7 +115,7 @@ All values are in ms:
 | --------------- | --- | --- | --- | --- |
 | `mixed_5`  | 5.67 | 10.5 | 17.0 | 40.9 |
 | `mixed_10` | 8.27 | 18.8 | 28.6 | 54.5 |
-| `mixed_18` | 13.3 | 28.7 | 39.1 | 105 |
+| `mixed_18` | 13.4 | 28.9 | 38.9 | 74.1 |
 | `nonagg_1` | 4.09 | 6.17 | 7.94 | 18.8 |
 | `nonagg_2` | 4.69 | 7.65 | 9.91 | 25.9 |
 | `nonagg_4` | 5.84 | 11.3 | 16.8 | 37.4 |
