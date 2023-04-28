@@ -53,7 +53,8 @@ you can modify `gen_feature_services.py` then run it to re-generate `feature_ser
 ## 1. Workspace Setup
 Once you're happy with the Feature Services in `feature_services.py`, do the following
 to apply the changes to your cluster:
-1. `tecton login <url>` to log into your cluster
+1. `tecton login <domain>` to log into your cluster
+    - e.g. `tecton login yourcluster.tecton.ai`
 2. `tecton workspace select <workspace>` to select your bench workspace
     - If you need to create the workspace, run `tecton workspace create --live <workspace>`
 3. `cd` to this repo then run `tecton apply` to apply the Feature Services in `feature_services.py`
@@ -75,7 +76,11 @@ to apply the changes to your cluster:
 ## 2. Generate Requests
 In order to generate the requests that will be sent to the get-features API, you need to run the `gen_requests` script like so:
 ```
-./gen_requests.py <url> <workspace>
+./gen_requests.py <domain> <workspace>
+```
+e.g.
+```
+./gen_requests.py yourcluster.tecton.ai benchmarking
 ```
 
 This populates the `requests` directory where each file represents a feature service's requests that will be sent by Vegeta.
@@ -86,6 +91,8 @@ To load a feature service, run:
 ```
 ./run_vegeta.py -s <feature_service>
 ```
+Note that the `feature_service` must correspond to a file in the `requests` directory, i.e. one of the feature services from [Step 1](#1-workspace-setup) that you generated requests for in [Step 2](#2-generate-requests).
+
 You can also specify the RPS (`-r`), duration (`-d`), and timeout (`-t`). The `--file` flag tells it to output to a file whose name is the same as the service name, in the `vegeta_out` directory.
 
 You can optionally run the `run_vegeta_all.sh` script to test some or all of the feature services at the same time, or just use it as a reference to copy and paste `./run_vegeta.py` commands into your console.
@@ -96,6 +103,8 @@ ps aux | grep vegeta | awk '{print $2}' | xargs kill
 ```
 
 # Metrics
+**DISCLAIMER**: You may see a small warmup period (usually lasts a few seconds max) of higher latency if you go from 0 RPS to hundreds of RPS. These numbers are measured after that initial period.
+
 Note that Dynamo is the online store. With 100 RPS, this is what we got (abbreviating the feature server names):
 
 ## Response Size Per Query
