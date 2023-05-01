@@ -23,7 +23,7 @@ class ReqUtil:
 
     @staticmethod
     def shell_capture(cmd_parts: List[str]) -> Tuple[int, str, str]:
-        res = subprocess.run(cmd_parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE, encoding="utf-8")
+        res = subprocess.run(cmd_parts, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if res.returncode != 0:
             print(f"Return code {res.returncode}\nStdout:\n{res.stdout}\n\nStderr:\n{res.stderr}\n")
         return (res.returncode, res.stdout, res.stderr)
@@ -57,8 +57,6 @@ def main():
     parser.add_argument("-f", "--file", help=f"If set, output to a file in {VEGET_OUT_FOLDERNAME}", action="store_true", default=False)
     args = parser.parse_args()
 
-    print(f"Running Vegeta against {args.service}...")
-
     # Check for API key
     api_key = ReqUtil._tecton_api_key()
 
@@ -69,6 +67,34 @@ def main():
 
     req_file = REQS_DIR / args.service
 
+    # Warm up first
+    warmup_rps = args.rps // 2
+    warmup_duration = min(args.duration // 2, 30)
+    print(f"Warming up with {warmup_rps} RPS for {warmup_duration} seconds...")
+    cmd_attack_warmup = [
+        "vegeta",
+        "attack",
+        "--format=json",
+        f"--targets={req_file}",
+        f"--timeout={args.timeout}ms",
+        f"--rate={warmup_rps}/1s",
+        "--max-workers=20000",
+        f"--duration={warmup_duration}s",
+        f"--header=Authorization: Tecton-key {api_key}",
+    ]
+    cmd_report_warmup = [
+        "vegeta",
+        "report",
+        "--every=1s",
+    ]
+    if args.file:
+        VEGETA_OUT_DIR.mkdir(parents=True, exist_ok=True)
+        out_file = VEGETA_OUT_DIR / f"{str(args.service)}_WARMUP"
+        cmd_report_warmup.append(f"--output={out_file}")
+    ReqUtil.shell_pipe(cmd_attack_warmup, cmd_report_warmup)
+
+    # Then do full load
+    print(f"\nNow sending full load to {args.service}...")
     cmd_attack = [
         "vegeta",
         "attack",
