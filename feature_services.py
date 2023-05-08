@@ -9959,42 +9959,42 @@ def load_test_window_336_9109c85a45b703f87f1413a405549a2cea9ab556(data):
             {data}
         '''
 
-fs_mixed_5_feature_views = FeatureService(
-    name='fs_mixed_5_feature_views',
+fs_mixed_5_fv = FeatureService(
+    name='fs_mixed_5_fv',
     features=[load_test_lifetime_b6589fc6ab0dc82cf12099d1c2d40ab994e8410c, load_test_window_28_fa35e192121eabf3dabf9f5ea6abdbcbc107ac3b, load_test_window_7_0a57cb53ba59c46fc4b692527a38a87c78d84028, load_test_window_1_92cfceb39d57d914ed8b14d0e37643de0797ae56, load_test_window_336_c5b76da3e608d34edb07244cd9b875ee86906328]
 )
 
-fs_mixed_10_feature_views = FeatureService(
-    name='fs_mixed_10_feature_views',
+fs_mixed_10_fv = FeatureService(
+    name='fs_mixed_10_fv',
     features=[load_test_lifetime_356a192b7913b04c54574d18c28d46e6395428ab, load_test_window_28_f1abd670358e036c31296e66b3b66c382ac00812, load_test_window_7_7719a1c782a1ba91c031a682a0a2f8658209adbf, load_test_window_1_0286dd552c9bea9a69ecb3759e7b94777635514b, load_test_window_336_80e28a51cbc26fa4bd34938c5e593b36146f5e0c, load_test_lifetime_b6589fc6ab0dc82cf12099d1c2d40ab994e8410c, load_test_window_28_fa35e192121eabf3dabf9f5ea6abdbcbc107ac3b, load_test_window_7_0a57cb53ba59c46fc4b692527a38a87c78d84028, load_test_window_1_92cfceb39d57d914ed8b14d0e37643de0797ae56, load_test_window_336_c5b76da3e608d34edb07244cd9b875ee86906328]
 )
 
-fs_mixed_18_feature_views = FeatureService(
-    name='fs_mixed_18_feature_views',
+fs_mixed_18_fv = FeatureService(
+    name='fs_mixed_18_fv',
     features=[load_test_lifetime_da4b9237bacccdf19c0760cab7aec4a8359010b0, load_test_lifetime_77de68daecd823babbb58edb1c8e14d7106e83bb, load_test_window_28_1574bddb75c78a6fd2251d61e2993b5146201319, load_test_window_28_0716d9708d321ffb6a00818614779e779925365c, load_test_window_7_22d200f8670dbdb3e253a90eee5098477c95c23d, load_test_window_7_632667547e7cd3e0466547863e1207a8c0c0c549, load_test_window_1_98fbc42faedc02492397cb5962ea3a3ffc0a9243, load_test_window_336_8effee409c625e1a2d8f5033631840e6ce1dcb64, load_test_lifetime_356a192b7913b04c54574d18c28d46e6395428ab, load_test_window_28_f1abd670358e036c31296e66b3b66c382ac00812, load_test_window_7_7719a1c782a1ba91c031a682a0a2f8658209adbf, load_test_window_1_0286dd552c9bea9a69ecb3759e7b94777635514b, load_test_window_336_80e28a51cbc26fa4bd34938c5e593b36146f5e0c, load_test_lifetime_b6589fc6ab0dc82cf12099d1c2d40ab994e8410c, load_test_window_28_fa35e192121eabf3dabf9f5ea6abdbcbc107ac3b, load_test_window_7_0a57cb53ba59c46fc4b692527a38a87c78d84028, load_test_window_1_92cfceb39d57d914ed8b14d0e37643de0797ae56, load_test_window_336_c5b76da3e608d34edb07244cd9b875ee86906328]
 )
 
-fs_non_aggregate_1_feature_views = FeatureService(
-    name='fs_non_aggregate_1_feature_views',
+fs_nonagg_1_fv = FeatureService(
+    name='fs_nonagg_1_fv',
     features=[load_test_lifetime_b6589fc6ab0dc82cf12099d1c2d40ab994e8410c]
 )
 
-fs_non_aggregate_2_feature_views = FeatureService(
-    name='fs_non_aggregate_2_feature_views',
+fs_nonagg_2_fv = FeatureService(
+    name='fs_nonagg_2_fv',
     features=[load_test_lifetime_356a192b7913b04c54574d18c28d46e6395428ab, load_test_lifetime_b6589fc6ab0dc82cf12099d1c2d40ab994e8410c]
 )
 
-fs_non_aggregate_4_feature_views = FeatureService(
-    name='fs_non_aggregate_4_feature_views',
+fs_nonagg_4_fv = FeatureService(
+    name='fs_nonagg_4_fv',
     features=[load_test_lifetime_da4b9237bacccdf19c0760cab7aec4a8359010b0, load_test_lifetime_77de68daecd823babbb58edb1c8e14d7106e83bb, load_test_lifetime_356a192b7913b04c54574d18c28d46e6395428ab, load_test_lifetime_b6589fc6ab0dc82cf12099d1c2d40ab994e8410c]
 )
 
 ALL_FEATURE_SERVICES = [
-    "fs_mixed_5_feature_views",
-    "fs_mixed_10_feature_views",
-    "fs_mixed_18_feature_views",
-    "fs_non_aggregate_1_feature_views",
-    "fs_non_aggregate_2_feature_views",
-    "fs_non_aggregate_4_feature_views",
+    "fs_mixed_5_fv",
+    "fs_mixed_10_fv",
+    "fs_mixed_18_fv",
+    "fs_nonagg_1_fv",
+    "fs_nonagg_2_fv",
+    "fs_nonagg_4_fv",
 ]
     

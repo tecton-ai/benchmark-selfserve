@@ -22,19 +22,19 @@ test_datasource = BatchSource(
 ```
 
 ### Feature Services
-- `fs_non_aggregate_1_feature_views`
+- `fs_nonagg_1_fv`
     - 1 non-aggregate feature view
-- `fs_non_aggregate_2_feature_views`
-    - 2 non-aggregate feature view
-- `fs_non_aggregate_4_feature_views`
-    - 4 non-aggregate feature view
-- `fs_mixed_5_feature_views`
+- `fs_nonagg_2_fv`
+    - 2 non-aggregate feature views
+- `fs_nonagg_4_fv`
+    - 4 non-aggregate feature views
+- `fs_mixed_5_fv`
     - 5 feature views
-    - 4 aggregate and 1 non-aggregate feature views
-- `fs_mixed_10_feature_views`
+    - 4 aggregate and 1 non-aggregate feature view
+- `fs_mixed_10_fv`
     - 10 feature views
     - 8 aggregate and 2 non-aggregate feature views
-- `fs_mixed_18_feature_views`
+- `fs_mixed_18_fv`
     - 18 feature views
     - 14 aggregate and 4 non-aggregate feature views
 
