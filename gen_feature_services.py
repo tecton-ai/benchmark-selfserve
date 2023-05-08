@@ -133,14 +133,6 @@ def main():
         ("1", "1", (50, 50, 100, 800)),
         ('336', "7", (13, 12, 25, 200))
     ]
-    #
-    # splits = [
-    #     ("lifetime", None, (1,2, 3, 4)),
-    #     ("28d", "7d", (1,2, 3, 4)),
-    #     ("7d", "1d", (1,2, 3, 4)),
-    #     ("1d", "1h", (1,2, 3, 4)),
-    #     ('336d', "7d", (1,2, 3, 4))
-    # ]
     start_year=2020
     start_month=10
     start_day=10
@@ -202,12 +194,13 @@ def main():
                 feature_view_num += 1
 
     fs_prefix = "fs"
+    fv_suffix = "fv"
     all_feature_services = []
     for i in range(N_MIXED_FS):
         features = fs[i]
         if i > 0:
             fs[i] += fs[i-1]
-        name = f"{fs_prefix}_mixed_{len(features)}_feature_views"
+        name = f"{fs_prefix}_mixed_{len(features)}_{fv_suffix}"
         all_feature_services.append(name)
         code += gen_feature_service(name, features)
     for i in range(N_MIXED_FS, N_MIXED_FS*2):
@@ -216,7 +209,7 @@ def main():
         for feature in features:
             if "load_test_lifetime" in feature:
                 tfv_features.append(feature)
-        name = f"{fs_prefix}_non_aggregate_{len(tfv_features)}_feature_views"
+        name = f"{fs_prefix}_nonagg_{len(tfv_features)}_{fv_suffix}"
         all_feature_services.append(name)
         code += gen_feature_service(name, tfv_features)
 
