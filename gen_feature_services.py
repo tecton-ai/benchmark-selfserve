@@ -55,6 +55,7 @@ def gen_lifetime_feature(
     feature_start_time=datetime({start_year}, {start_month}, {start_day}),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def {feature_name}(data):
     return f'''
@@ -103,6 +104,7 @@ def gen_agg_feature(
     online=True,
     offline=False,
     feature_start_time=datetime({start_year}, {start_month}, {start_day}),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def {feature_name}(data):
     return f'''
@@ -120,6 +122,7 @@ def gen_feature_service(name, features):
 {name} = FeatureService(
     name='{name}',
     features={str(features).replace("'", "")}
+    options={"DEV_USE_CACHED_FEATURES": "true"},
 )
 """
 

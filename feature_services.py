@@ -28,6 +28,7 @@ from tecton import FeatureService
     feature_start_time=datetime(2020, 10, 10),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_lifetime_b6589fc6ab0dc82cf12099d1c2d40ab994e8410c(data):
     return f'''
@@ -110,6 +111,7 @@ def load_test_lifetime_b6589fc6ab0dc82cf12099d1c2d40ab994e8410c(data):
     feature_start_time=datetime(2020, 10, 10),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_lifetime_356a192b7913b04c54574d18c28d46e6395428ab(data):
     return f'''
@@ -191,6 +193,7 @@ def load_test_lifetime_356a192b7913b04c54574d18c28d46e6395428ab(data):
     feature_start_time=datetime(2020, 10, 10),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_lifetime_da4b9237bacccdf19c0760cab7aec4a8359010b0(data):
     return f'''
@@ -310,6 +313,7 @@ def load_test_lifetime_da4b9237bacccdf19c0760cab7aec4a8359010b0(data):
     feature_start_time=datetime(2020, 10, 10),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_lifetime_77de68daecd823babbb58edb1c8e14d7106e83bb(data):
     return f'''
@@ -354,6 +358,7 @@ def load_test_lifetime_77de68daecd823babbb58edb1c8e14d7106e83bb(data):
     feature_start_time=datetime(2020, 10, 10),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_lifetime_1b6453892473a467d07372d45eb05abc2031647a(data):
     return f'''
@@ -473,6 +478,7 @@ def load_test_lifetime_1b6453892473a467d07372d45eb05abc2031647a(data):
     feature_start_time=datetime(2020, 10, 10),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_lifetime_ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4(data):
     return f'''
@@ -592,6 +598,7 @@ def load_test_lifetime_ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4(data):
     feature_start_time=datetime(2020, 10, 10),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_lifetime_c1dfd96eea8cc2b62785275bca38ac261256e278(data):
     return f'''
@@ -711,6 +718,7 @@ def load_test_lifetime_c1dfd96eea8cc2b62785275bca38ac261256e278(data):
     feature_start_time=datetime(2020, 10, 10),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_lifetime_902ba3cda1883801594b6e1b452790cc53948fda(data):
     return f'''
@@ -830,6 +838,7 @@ def load_test_lifetime_902ba3cda1883801594b6e1b452790cc53948fda(data):
     feature_start_time=datetime(2020, 10, 10),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_lifetime_fe5dbbcea5ce7e2988b8c69bcfdfde8904aabc1f(data):
     return f'''
@@ -949,6 +958,7 @@ def load_test_lifetime_fe5dbbcea5ce7e2988b8c69bcfdfde8904aabc1f(data):
     feature_start_time=datetime(2020, 10, 10),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_lifetime_0ade7c2cf97f75d009975f4d720d1fa6c19f4897(data):
     return f'''
@@ -1068,6 +1078,7 @@ def load_test_lifetime_0ade7c2cf97f75d009975f4d720d1fa6c19f4897(data):
     feature_start_time=datetime(2020, 10, 10),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_lifetime_b1d5781111d84f7b3fe45a0852e59758cd7a87e5(data):
     return f'''
@@ -1187,6 +1198,7 @@ def load_test_lifetime_b1d5781111d84f7b3fe45a0852e59758cd7a87e5(data):
     feature_start_time=datetime(2020, 10, 10),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_lifetime_17ba0791499db908433b80f37c5fbc89b870084b(data):
     return f'''
@@ -1306,6 +1318,7 @@ def load_test_lifetime_17ba0791499db908433b80f37c5fbc89b870084b(data):
     feature_start_time=datetime(2020, 10, 10),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_lifetime_7b52009b64fd0a2a49e6d8a939753077792b0554(data):
     return f'''
@@ -1425,6 +1438,7 @@ def load_test_lifetime_7b52009b64fd0a2a49e6d8a939753077792b0554(data):
     feature_start_time=datetime(2020, 10, 10),
     batch_schedule=timedelta(days=1),
     ttl=timedelta(days=3650),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_lifetime_bd307a3ec329e10a2cff8fb87480823da114f8f4(data):
     return f'''
@@ -1608,6 +1622,7 @@ def load_test_lifetime_bd307a3ec329e10a2cff8fb87480823da114f8f4(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_28_fa35e192121eabf3dabf9f5ea6abdbcbc107ac3b(data):
     return f'''
@@ -1754,6 +1769,7 @@ def load_test_window_28_fa35e192121eabf3dabf9f5ea6abdbcbc107ac3b(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_28_f1abd670358e036c31296e66b3b66c382ac00812(data):
     return f'''
@@ -1938,6 +1954,7 @@ def load_test_window_28_f1abd670358e036c31296e66b3b66c382ac00812(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_28_1574bddb75c78a6fd2251d61e2993b5146201319(data):
     return f'''
@@ -2084,6 +2101,7 @@ def load_test_window_28_1574bddb75c78a6fd2251d61e2993b5146201319(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_28_0716d9708d321ffb6a00818614779e779925365c(data):
     return f'''
@@ -2230,6 +2248,7 @@ def load_test_window_28_0716d9708d321ffb6a00818614779e779925365c(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_28_9e6a55b6b4563e652a23be9d623ca5055c356940(data):
     return f'''
@@ -2451,6 +2470,7 @@ def load_test_window_28_9e6a55b6b4563e652a23be9d623ca5055c356940(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_28_b3f0c7f6bb763af1be91d9e74eabfeb199dc1f1f(data):
     return f'''
@@ -2672,6 +2692,7 @@ def load_test_window_28_b3f0c7f6bb763af1be91d9e74eabfeb199dc1f1f(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_28_91032ad7bbcb6cf72875e8e8207dcfba80173f7c(data):
     return f'''
@@ -2893,6 +2914,7 @@ def load_test_window_28_91032ad7bbcb6cf72875e8e8207dcfba80173f7c(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_28_472b07b9fcf2c2451e8781e944bf5f77cd8457c8(data):
     return f'''
@@ -3114,6 +3136,7 @@ def load_test_window_28_472b07b9fcf2c2451e8781e944bf5f77cd8457c8(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_28_12c6fc06c99a462375eeb3f43dfd832b08ca9e17(data):
     return f'''
@@ -3335,6 +3358,7 @@ def load_test_window_28_12c6fc06c99a462375eeb3f43dfd832b08ca9e17(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_28_d435a6cdd786300dff204ee7c2ef942d3e9034e2(data):
     return f'''
@@ -3556,6 +3580,7 @@ def load_test_window_28_d435a6cdd786300dff204ee7c2ef942d3e9034e2(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_28_4d134bc072212ace2df385dae143139da74ec0ef(data):
     return f'''
@@ -3777,6 +3802,7 @@ def load_test_window_28_4d134bc072212ace2df385dae143139da74ec0ef(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_28_f6e1126cedebf23e1463aee73f9df08783640400(data):
     return f'''
@@ -3998,6 +4024,7 @@ def load_test_window_28_f6e1126cedebf23e1463aee73f9df08783640400(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_28_887309d048beef83ad3eabf2a79a64a389ab1c9f(data):
     return f'''
@@ -4219,6 +4246,7 @@ def load_test_window_28_887309d048beef83ad3eabf2a79a64a389ab1c9f(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_28_bc33ea4e26e5e1af1408321416956113a4658763(data):
     return f'''
@@ -4402,6 +4430,7 @@ def load_test_window_28_bc33ea4e26e5e1af1408321416956113a4658763(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_7_0a57cb53ba59c46fc4b692527a38a87c78d84028(data):
     return f'''
@@ -4548,6 +4577,7 @@ def load_test_window_7_0a57cb53ba59c46fc4b692527a38a87c78d84028(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_7_7719a1c782a1ba91c031a682a0a2f8658209adbf(data):
     return f'''
@@ -4732,6 +4762,7 @@ def load_test_window_7_7719a1c782a1ba91c031a682a0a2f8658209adbf(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_7_22d200f8670dbdb3e253a90eee5098477c95c23d(data):
     return f'''
@@ -4878,6 +4909,7 @@ def load_test_window_7_22d200f8670dbdb3e253a90eee5098477c95c23d(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_7_632667547e7cd3e0466547863e1207a8c0c0c549(data):
     return f'''
@@ -5024,6 +5056,7 @@ def load_test_window_7_632667547e7cd3e0466547863e1207a8c0c0c549(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_7_cb4e5208b4cd87268b208e49452ed6e89a68e0b8(data):
     return f'''
@@ -5245,6 +5278,7 @@ def load_test_window_7_cb4e5208b4cd87268b208e49452ed6e89a68e0b8(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_7_b6692ea5df920cad691c20319a6fffd7a4a766b8(data):
     return f'''
@@ -5466,6 +5500,7 @@ def load_test_window_7_b6692ea5df920cad691c20319a6fffd7a4a766b8(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_7_f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59(data):
     return f'''
@@ -5687,6 +5722,7 @@ def load_test_window_7_f1f836cb4ea6efb2a0b1b99f41ad8b103eff4b59(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_7_972a67c48192728a34979d9a35164c1295401b71(data):
     return f'''
@@ -5908,6 +5944,7 @@ def load_test_window_7_972a67c48192728a34979d9a35164c1295401b71(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_7_fc074d501302eb2b93e2554793fcaf50b3bf7291(data):
     return f'''
@@ -6129,6 +6166,7 @@ def load_test_window_7_fc074d501302eb2b93e2554793fcaf50b3bf7291(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_7_cb7a1d775e800fd1ee4049f7dca9e041eb9ba083(data):
     return f'''
@@ -6350,6 +6388,7 @@ def load_test_window_7_cb7a1d775e800fd1ee4049f7dca9e041eb9ba083(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_7_5b384ce32d8cdef02bc3a139d4cac0a22bb029e8(data):
     return f'''
@@ -6571,6 +6610,7 @@ def load_test_window_7_5b384ce32d8cdef02bc3a139d4cac0a22bb029e8(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_7_ca3512f4dfa95a03169c5a670a4c91a19b3077b4(data):
     return f'''
@@ -6792,6 +6832,7 @@ def load_test_window_7_ca3512f4dfa95a03169c5a670a4c91a19b3077b4(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_7_af3e133428b9e25c55bc59fe534248e6a0c0f17b(data):
     return f'''
@@ -7013,6 +7054,7 @@ def load_test_window_7_af3e133428b9e25c55bc59fe534248e6a0c0f17b(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_7_761f22b2c1593d0bb87e0b606f990ba4974706de(data):
     return f'''
@@ -7184,6 +7226,7 @@ def load_test_window_7_761f22b2c1593d0bb87e0b606f990ba4974706de(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_1_92cfceb39d57d914ed8b14d0e37643de0797ae56(data):
     return f'''
@@ -7305,6 +7348,7 @@ def load_test_window_1_92cfceb39d57d914ed8b14d0e37643de0797ae56(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_1_0286dd552c9bea9a69ecb3759e7b94777635514b(data):
     return f'''
@@ -7476,6 +7520,7 @@ def load_test_window_1_0286dd552c9bea9a69ecb3759e7b94777635514b(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_1_98fbc42faedc02492397cb5962ea3a3ffc0a9243(data):
     return f'''
@@ -7697,6 +7742,7 @@ def load_test_window_1_98fbc42faedc02492397cb5962ea3a3ffc0a9243(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_1_fb644351560d8296fe6da332236b1f8d61b2828a(data):
     return f'''
@@ -7918,6 +7964,7 @@ def load_test_window_1_fb644351560d8296fe6da332236b1f8d61b2828a(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_1_fe2ef495a1152561572949784c16bf23abb28057(data):
     return f'''
@@ -8139,6 +8186,7 @@ def load_test_window_1_fe2ef495a1152561572949784c16bf23abb28057(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_1_827bfc458708f0b442009c9c9836f7e4b65557fb(data):
     return f'''
@@ -8360,6 +8408,7 @@ def load_test_window_1_827bfc458708f0b442009c9c9836f7e4b65557fb(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_1_64e095fe763fc62418378753f9402623bea9e227(data):
     return f'''
@@ -8581,6 +8630,7 @@ def load_test_window_1_64e095fe763fc62418378753f9402623bea9e227(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_1_2e01e17467891f7c933dbaa00e1459d23db3fe4f(data):
     return f'''
@@ -8802,6 +8852,7 @@ def load_test_window_1_2e01e17467891f7c933dbaa00e1459d23db3fe4f(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_1_e1822db470e60d090affd0956d743cb0e7cdf113(data):
     return f'''
@@ -9023,6 +9074,7 @@ def load_test_window_1_e1822db470e60d090affd0956d743cb0e7cdf113(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_1_b7eb6c689c037217079766fdb77c3bac3e51cb4c(data):
     return f'''
@@ -9244,6 +9296,7 @@ def load_test_window_1_b7eb6c689c037217079766fdb77c3bac3e51cb4c(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_1_a9334987ece78b6fe8bf130ef00b74847c1d3da6(data):
     return f'''
@@ -9378,6 +9431,7 @@ def load_test_window_1_a9334987ece78b6fe8bf130ef00b74847c1d3da6(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_336_c5b76da3e608d34edb07244cd9b875ee86906328(data):
     return f'''
@@ -9424,6 +9478,7 @@ def load_test_window_336_c5b76da3e608d34edb07244cd9b875ee86906328(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_336_80e28a51cbc26fa4bd34938c5e593b36146f5e0c(data):
     return f'''
@@ -9482,6 +9537,7 @@ def load_test_window_336_80e28a51cbc26fa4bd34938c5e593b36146f5e0c(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_336_8effee409c625e1a2d8f5033631840e6ce1dcb64(data):
     return f'''
@@ -9628,6 +9684,7 @@ def load_test_window_336_8effee409c625e1a2d8f5033631840e6ce1dcb64(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_336_54ceb91256e8190e474aa752a6e0650a2df5ba37(data):
     return f'''
@@ -9849,6 +9906,7 @@ def load_test_window_336_54ceb91256e8190e474aa752a6e0650a2df5ba37(data):
     online=True,
     offline=False,
     feature_start_time=datetime(2020, 10, 10),
+    options={"DEV_CACHE_MAX_AGE_SECONDS": "3600"},
 )
 def load_test_window_336_9109c85a45b703f87f1413a405549a2cea9ab556(data):
     return f'''
@@ -9960,31 +10018,38 @@ def load_test_window_336_9109c85a45b703f87f1413a405549a2cea9ab556(data):
         '''
 
 fs_mixed_5_feature_views = FeatureService(
+    options={"DEV_USE_CACHED_FEATURES": "true"},
     name='fs_mixed_5_feature_views',
     features=[load_test_lifetime_b6589fc6ab0dc82cf12099d1c2d40ab994e8410c, load_test_window_28_fa35e192121eabf3dabf9f5ea6abdbcbc107ac3b, load_test_window_7_0a57cb53ba59c46fc4b692527a38a87c78d84028, load_test_window_1_92cfceb39d57d914ed8b14d0e37643de0797ae56, load_test_window_336_c5b76da3e608d34edb07244cd9b875ee86906328]
 )
 
 fs_mixed_10_feature_views = FeatureService(
+    options={"DEV_USE_CACHED_FEATURES": "true"},
     name='fs_mixed_10_feature_views',
     features=[load_test_lifetime_356a192b7913b04c54574d18c28d46e6395428ab, load_test_window_28_f1abd670358e036c31296e66b3b66c382ac00812, load_test_window_7_7719a1c782a1ba91c031a682a0a2f8658209adbf, load_test_window_1_0286dd552c9bea9a69ecb3759e7b94777635514b, load_test_window_336_80e28a51cbc26fa4bd34938c5e593b36146f5e0c, load_test_lifetime_b6589fc6ab0dc82cf12099d1c2d40ab994e8410c, load_test_window_28_fa35e192121eabf3dabf9f5ea6abdbcbc107ac3b, load_test_window_7_0a57cb53ba59c46fc4b692527a38a87c78d84028, load_test_window_1_92cfceb39d57d914ed8b14d0e37643de0797ae56, load_test_window_336_c5b76da3e608d34edb07244cd9b875ee86906328]
 )
 
 fs_mixed_18_feature_views = FeatureService(
+    options={"DEV_USE_CACHED_FEATURES": "true"},
     name='fs_mixed_18_feature_views',
     features=[load_test_lifetime_da4b9237bacccdf19c0760cab7aec4a8359010b0, load_test_lifetime_77de68daecd823babbb58edb1c8e14d7106e83bb, load_test_window_28_1574bddb75c78a6fd2251d61e2993b5146201319, load_test_window_28_0716d9708d321ffb6a00818614779e779925365c, load_test_window_7_22d200f8670dbdb3e253a90eee5098477c95c23d, load_test_window_7_632667547e7cd3e0466547863e1207a8c0c0c549, load_test_window_1_98fbc42faedc02492397cb5962ea3a3ffc0a9243, load_test_window_336_8effee409c625e1a2d8f5033631840e6ce1dcb64, load_test_lifetime_356a192b7913b04c54574d18c28d46e6395428ab, load_test_window_28_f1abd670358e036c31296e66b3b66c382ac00812, load_test_window_7_7719a1c782a1ba91c031a682a0a2f8658209adbf, load_test_window_1_0286dd552c9bea9a69ecb3759e7b94777635514b, load_test_window_336_80e28a51cbc26fa4bd34938c5e593b36146f5e0c, load_test_lifetime_b6589fc6ab0dc82cf12099d1c2d40ab994e8410c, load_test_window_28_fa35e192121eabf3dabf9f5ea6abdbcbc107ac3b, load_test_window_7_0a57cb53ba59c46fc4b692527a38a87c78d84028, load_test_window_1_92cfceb39d57d914ed8b14d0e37643de0797ae56, load_test_window_336_c5b76da3e608d34edb07244cd9b875ee86906328]
 )
 
 fs_non_aggregate_1_feature_views = FeatureService(
+    options={"DEV_USE_CACHED_FEATURES": "true"},
     name='fs_non_aggregate_1_feature_views',
     features=[load_test_lifetime_b6589fc6ab0dc82cf12099d1c2d40ab994e8410c]
 )
 
 fs_non_aggregate_2_feature_views = FeatureService(
+    options={"DEV_USE_CACHED_FEATURES": "true"},
     name='fs_non_aggregate_2_feature_views',
     features=[load_test_lifetime_356a192b7913b04c54574d18c28d46e6395428ab, load_test_lifetime_b6589fc6ab0dc82cf12099d1c2d40ab994e8410c]
 )
 
 fs_non_aggregate_4_feature_views = FeatureService(
+    options={"DEV_USE_CACHED_FEATURES": "true"},
+
     name='fs_non_aggregate_4_feature_views',
     features=[load_test_lifetime_da4b9237bacccdf19c0760cab7aec4a8359010b0, load_test_lifetime_77de68daecd823babbb58edb1c8e14d7106e83bb, load_test_lifetime_356a192b7913b04c54574d18c28d46e6395428ab, load_test_lifetime_b6589fc6ab0dc82cf12099d1c2d40ab994e8410c]
 )
@@ -9997,4 +10062,3 @@ ALL_FEATURE_SERVICES = [
     "fs_non_aggregate_2_feature_views",
     "fs_non_aggregate_4_feature_views",
 ]
-    
