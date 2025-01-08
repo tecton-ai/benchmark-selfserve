@@ -3,6 +3,7 @@ import hashlib
 import os
 from pathlib import Path
 import stat
+from datetime import datetime
 
 OUT_FILE = Path(__file__).parent / 'feature_services.py'
 RUN_SCRIPT = Path(__file__).parent / 'run_vegeta_all.sh'
@@ -11,251 +12,158 @@ N_MIXED_FS = 3
 
 
 header =  """from tecton import FileConfig, BatchSource, Entity, batch_feature_view
-
+from tecton.types import Field, String, Int64
 
 test_datasource = BatchSource(
   name='test_datasource',
   batch_config=FileConfig(
-    uri='s3://tecton.ai.public/data/load_testing_data.pq',
+    uri='s3://tecton.ai.public/benchmark/kevinz/loadtesting_data_final.pq',
     file_format='parquet',
     timestamp_field='timestamp',
   ),
-  owner='rohit@tecton.ai',
+  owner='kzhang@tecton.ai',
   tags={'release': 'test'},
 )
 
-customer = Entity(name='customer', join_keys=['cust_id'])
-merchant = Entity(name='merchant', join_keys=['merchant_id'])
+customer = Entity(name='customer', join_keys=[Field('cust_id', Int64)])
+merchant = Entity(name='merchant', join_keys=[Field('merchant_id', Int64)])
 
-from tecton import Aggregation, FilteredSource
+from tecton import Aggregate
 from datetime import datetime, timedelta
-from tecton import FeatureService
+from tecton import FeatureService, BatchTriggerType
+from tecton.aggregation_functions import approx_count_distinct, approx_percentile
+from tecton.aggregation_functions import last, last_distinct
 """
 
-
-def gen_lifetime_feature(
-    num_features,
-    feature_name,
-    start_year,
-    start_month,
-    start_day,
-):
-    features = ""
-    for i in range(num_features):
-        features += f"            amount/{i} as test_{i},"
-        if i != num_features-1:
-            features += "\n"
-    return f"""
-@batch_feature_view(
-    sources=[FilteredSource(test_datasource)],
-    entities=[customer],
+def generate_last_fv(column_name, function_name, aggregation_interval_hours=5, num_tiles=100, agg_func="last", n=5):
+    func = f"{agg_func}({n})"
+    if n == 1:
+        func = f"'last'"
+    code = f"""@batch_feature_view(
+    sources=[test_datasource],
+    entities=[merchant, customer],
     mode='spark_sql',
-    online=True,
-    offline=False,
-    feature_start_time=datetime({start_year}, {start_month}, {start_day}),
-    batch_schedule=timedelta(days=1),
-    ttl=timedelta(days=3650),
-)
-def {feature_name}(data):
-    return f'''
-        SELECT
-            cust_id,
-{features}
-            timestamp
-        FROM
-            {{data}}
-        '''
-"""
-
-def gen_agg_feature(
-    num_features,
-    feature_name,
-    entity,
-    join_key,
-    time_window,
-    slide_period,
-    start_year,
-    start_month,
-    start_day,
-    agg_function='sum',
-):
-    features = ""
-    feature_names = []
-    for i in range(num_features):
-        name = f"test_{i}"
-        features += f"            amount/{i} as {name},"
-        if i != num_features-1:
-            features += "\n"
-        feature_names.append(name)
-
-    aggregation_block = ""
-    for name in feature_names:
-        aggregation_block += f"        Aggregation(column='{name}', function='{agg_function}', time_window=timedelta(days={time_window})),\n"
-    return f"""
-@batch_feature_view(
-    sources=[FilteredSource(test_datasource)],
-    entities=[{entity}],
-    mode='spark_sql',
-    aggregation_interval=timedelta(days={slide_period}),
-    aggregations=[
-{aggregation_block}
+    aggregation_interval=timedelta(hours={aggregation_interval_hours}),
+    features=[
+        Aggregate(input_column=Field('{column_name}', String), function={func}, time_window=timedelta(hours={aggregation_interval_hours * num_tiles})),
     ],
+    tecton_materialization_runtime="1.0.20",
     online=True,
     offline=False,
-    feature_start_time=datetime({start_year}, {start_month}, {start_day}),
+    feature_start_time=datetime(2020, 10, 10),
+    timestamp_field="timestamp",
+    batch_trigger=BatchTriggerType.MANUAL,  # Use manual triggers
 )
-def {feature_name}(data):
-    return f'''
+def {function_name}(data):
+    return f\"\"\"
         SELECT
-            {join_key},
-{features}
+            merchant_id,
+            cust_id,
+            CAST(col3 as STRING) as {column_name},
             timestamp
         FROM
             {{data}}
-        '''
-"""
+        \"\"\"
 
-def gen_feature_service(name, features):
-    return f"""
-{name} = FeatureService(
-    name='{name}',
-    features={str(features).replace("'", "")}
+{function_name}_{aggregation_interval_hours*num_tiles}h_fs = FeatureService(
+    name='{function_name}_{aggregation_interval_hours*num_tiles}h_fs',
+    features=[{function_name}]
 )
 """
-
-def main():
-    NUM_FEATURES = 5000
-    max_features_per_feature_service = 100
-    splits = [
-        ("lifetime", None, (63, 62, 125, 1000)),
-        ("28", "7", (62, 63, 125, 1000)),
-        ("7", "1", (62, 63, 125, 1000)),
-        ("1", "1", (50, 50, 100, 800)),
-        ('336', "7", (13, 12, 25, 200))
-    ]
-    #
-    # splits = [
-    #     ("lifetime", None, (1,2, 3, 4)),
-    #     ("28d", "7d", (1,2, 3, 4)),
-    #     ("7d", "1d", (1,2, 3, 4)),
-    #     ("1d", "1h", (1,2, 3, 4)),
-    #     ('336d', "7d", (1,2, 3, 4))
-    # ]
-    start_year=2020
-    start_month=10
-    start_day=10
-
-    feature_view_num = 0
+    return code
 
 
-    fs = {
-        i: []
-        for i in range(2*N_MIXED_FS)
-    }
-
-    code = header
-    last = "merchant"
-
-    for window, slide_period, counts in splits:
-        for i, count in enumerate(counts):
-            subcounts = []
-            if count > max_features_per_feature_service:
-                subcounts += [max_features_per_feature_service] * int(count / max_features_per_feature_service)
-                if count % max_features_per_feature_service > 0:
-                    subcounts += [count % max_features_per_feature_service]
-            else:
-                subcounts = [count]
-            for num_features in subcounts:
-                if window == "lifetime":
-                    feature_name = "load_test_lifetime_" + hashlib.sha1(repr(feature_view_num).encode()).hexdigest()
-                    feature_code = gen_lifetime_feature(
-                        num_features,
-                        feature_name,
-                        start_year,
-                        start_month,
-                        start_day,
-                    )
-                else:
-                    feature_name = "load_test_window_" + window + "_" + hashlib.sha1(repr(feature_view_num).encode()).hexdigest()
-
-                    if last == "merchant":
-                        entity = 'customer'
-                        join_key = 'cust_id'
-                        last = "customer"
-                    else:
-                        entity = 'merchant'
-                        join_key = 'merchant_id'
-                        last = 'merchant'
-                    feature_code = gen_agg_feature(
-                        num_features,
-                        feature_name,
-                        entity,
-                        join_key,
-                        window,
-                        slide_period,
-                        start_year,
-                        start_month,
-                        start_day
-                    )
-                code += feature_code
-                fs[i].append(feature_name)
-                feature_view_num += 1
-
-    fs_prefix = "fs"
-    all_feature_services = []
-    for i in range(N_MIXED_FS):
-        features = fs[i]
-        if i > 0:
-            fs[i] += fs[i-1]
-        name = f"{fs_prefix}_mixed_{len(features)}_feature_views"
-        all_feature_services.append(name)
-        code += gen_feature_service(name, features)
-    for i in range(N_MIXED_FS, N_MIXED_FS*2):
-        features = fs[i-N_MIXED_FS]
-        tfv_features = []
-        for feature in features:
-            if "load_test_lifetime" in feature:
-                tfv_features.append(feature)
-        name = f"{fs_prefix}_non_aggregate_{len(tfv_features)}_feature_views"
-        all_feature_services.append(name)
-        code += gen_feature_service(name, tfv_features)
-
-    fs_names = "\n".join([f'    "{fs_name}",' for fs_name in all_feature_services])
-    code += f"""
-ALL_FEATURE_SERVICES = [
-{fs_names}
-]
+def generate_feature_view_code(
+    function_name: str,
+    column_name: str = 'test_0',
+    agg_function: str = 'sum',
+    aggregation_interval_hours=5,
+    num_tiles=100,
+    agg_col: str = "col4",
+):
     """
+    Generate a code snippet of a batch feature view definition and corresponding feature service.
+
+    Parameters:
+    -----------
+    function_name: str
+        The name of the feature view function (e.g., 'single_sum_7d').
+    column_name: str
+        The column to be aggregated.
+    agg_function: str
+        The aggregation function to apply (e.g., 'sum', 'avg', etc.).
+    time_window_days: int
+        The number of days for the aggregation time window.
+    start_date: datetime
+        The feature start time.
+
+    Returns:
+    --------
+    str
+        A string containing the code snippet for the batch feature view and feature service.
+    """
+    code = f"""@batch_feature_view(
+    sources=[test_datasource],
+    entities=[merchant, customer],
+    mode='spark_sql',
+    aggregation_interval=timedelta(hours={aggregation_interval_hours}),
+    features=[
+        Aggregate(input_column=Field('{column_name}', Int64), function={agg_function}, time_window=timedelta(hours={aggregation_interval_hours * num_tiles})),
+    ],
+    tecton_materialization_runtime="1.0.20",
+    online=True,
+    offline=False,
+    feature_start_time=datetime(2020, 10, 10),
+    timestamp_field="timestamp",
+    batch_trigger=BatchTriggerType.MANUAL,  # Use manual triggers
+)
+def {function_name}(data):
+    return f\"\"\"
+        SELECT
+            merchant_id,
+            cust_id,
+            {agg_col} as {column_name},
+            timestamp
+        FROM
+            {{data}}
+        \"\"\"
+
+{function_name}_{aggregation_interval_hours*num_tiles}h_fs = FeatureService(
+    name='{function_name}_{aggregation_interval_hours*num_tiles}h_fs',
+    features=[{function_name}]
+)
+"""
+    return code
+agg_functions = [
+    ("'max'","max", "col4"),
+    ("'mean'","mean", "col4"),
+    ("'var_samp'", "var_samp", "col4"),
+    ("'var_pop'", "var_pop", "col4"),
+    ("approx_count_distinct(precision=12)", "approx_count", "col5"),
+    ("approx_percentile(percentile=0.5, precision=100)", "approx_percentile", "col4"),
+]
+
+
+def write():
+    code = ""
+    code += header + "\n\n"
+    for agg, name, agg_col in agg_functions:
+        code += generate_feature_view_code(f"fv_{name}", aggregation_interval_hours=4, num_tiles=100, agg_function=agg, agg_col =agg_col)
+        code += "\n\n"
+
+    for n in [5, 100]:
+        code += generate_last_fv("last_col", f"last{n}_fv", aggregation_interval_hours=4, num_tiles=100, agg_func="last", n=n)
+        code += "\n\n"
+        code += generate_last_fv("last_col", f"last_distinct{n}_fv", aggregation_interval_hours=4, num_tiles=100, agg_func="last_distinct", n=n)
+        code += "\n\n"
+
+    code += generate_last_fv("last_col", f"last_fv", aggregation_interval_hours=4, num_tiles=100, agg_func="last", n=1)
+    code += "\n\n"
 
     try:
         os.remove(OUT_FILE)
     except:
         pass
-    try:
-        os.remove(RUN_SCRIPT)
-    except:
-        pass
 
     OUT_FILE.write_text(code)
-
-    script_lines = "\n".join([
-        f"./run_vegeta.py --service {fs_name} --file -r 5 -d 10 -t 5000 &" for fs_name in all_feature_services
-    ])
-
-    # Now codegen the run-all script
-    script = f"""#!/bin/sh
-
-#
-# Use this as a "workspace" to loadtest multiple services as the same time,
-# or just as a reference to paste line(s) into your console.
-#
-
-{script_lines}
-
-"""
-    RUN_SCRIPT.write_text(script)
-    RUN_SCRIPT.chmod(RUN_SCRIPT.stat().st_mode | stat.S_IEXEC)
-
-
-if __name__ == '__main__':
-    main()
+write()
