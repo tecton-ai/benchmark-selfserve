@@ -9,11 +9,11 @@ import requests
 
 URL = "https://dev-serving.tecton.ai/api/v1/feature-service/get-features"
 
-HEADERS = {"Authorization": "Tecton-key cfdaa5c4d605f6dd8e8f438c057e4623"}
+HEADERS = {"Authorization": "Tecton-key "}
 dt = datetime(2025, 1, 1, 0, 0, 0)
 SAMPLE_PARAMS = {
     "params": {
-        "feature_service_name": "fv_sum_7d_fs",
+        "feature_service_name": "fv_mean_400h_fs",
         "join_key_map": {
         "cust_id": str(50),
         "merchant_id": str(50),
@@ -35,3 +35,5 @@ def get_feature():
         print(x.status_code)
     else:
         print(x.text)
+if __name__ == "__main__":
+    get_feature()
