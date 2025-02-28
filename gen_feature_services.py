@@ -65,8 +65,8 @@ def {function_name}(data):
             {{data}}
         \"\"\"
 
-{function_name}_{aggregation_interval_hours*num_tiles}h_fs = FeatureService(
-    name='{function_name}_{aggregation_interval_hours*num_tiles}h_fs',
+{function_name}_{aggregation_interval_hours*num_tiles}d_fs = FeatureService(
+    name='{function_name}_{aggregation_interval_hours*num_tiles}d_fs',
     features=[{function_name}]
 )
 """
@@ -151,10 +151,10 @@ def write():
         code += generate_feature_view_code(f"fv_{name}", aggregation_interval_hours=4, num_tiles=100, agg_function=agg, agg_col =agg_col)
         code += "\n\n"
 
-    for n in [5, 100]:
-        code += generate_last_fv("last_col", f"last{n}_fv", aggregation_interval_hours=4, num_tiles=100, agg_func="last", n=n)
+    for n in [4, 96]:
+        code += generate_last_fv("last_col", f"last{n}_fv", aggregation_interval_hours=n, num_tiles=100, agg_func="last", n=n)
         code += "\n\n"
-        code += generate_last_fv("last_col", f"last_distinct{n}_fv", aggregation_interval_hours=4, num_tiles=100, agg_func="last_distinct", n=n)
+        code += generate_last_fv("last_col", f"last_distinct{n}_fv", aggregation_interval_hours=n, num_tiles=100, agg_func="last_distinct", n=n)
         code += "\n\n"
 
     code += generate_last_fv("last_col", f"last_fv", aggregation_interval_hours=4, num_tiles=100, agg_func="last", n=1)

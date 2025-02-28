@@ -220,7 +220,7 @@ fv_approx_percentile_400h_fs = FeatureService(
     mode='spark_sql',
     aggregation_interval=timedelta(hours=4),
     features=[
-        Aggregate(input_column=Field('last_col', String), function=last(5), time_window=timedelta(hours=400)),
+        Aggregate(input_column=Field('last_col', String), function=last(4), time_window=timedelta(hours=400)),
     ],
     tecton_materialization_runtime="1.0.20",
     online=True,
@@ -229,7 +229,7 @@ fv_approx_percentile_400h_fs = FeatureService(
     timestamp_field="timestamp",
     batch_trigger=BatchTriggerType.MANUAL,  # Use manual triggers
 )
-def last5_fv(data):
+def last4_fv(data):
     return f"""
         SELECT
             merchant_id,
@@ -240,9 +240,9 @@ def last5_fv(data):
             {data}
         """
 
-last5_fv_400h_fs = FeatureService(
-    name='last5_fv_400h_fs',
-    features=[last5_fv]
+last4_fv_400d_fs = FeatureService(
+    name='last4_fv_400d_fs',
+    features=[last4_fv]
 )
 
 
@@ -252,7 +252,7 @@ last5_fv_400h_fs = FeatureService(
     mode='spark_sql',
     aggregation_interval=timedelta(hours=4),
     features=[
-        Aggregate(input_column=Field('last_col', String), function=last_distinct(5), time_window=timedelta(hours=400)),
+        Aggregate(input_column=Field('last_col', String), function=last_distinct(4), time_window=timedelta(hours=400)),
     ],
     tecton_materialization_runtime="1.0.20",
     online=True,
@@ -261,7 +261,7 @@ last5_fv_400h_fs = FeatureService(
     timestamp_field="timestamp",
     batch_trigger=BatchTriggerType.MANUAL,  # Use manual triggers
 )
-def last_distinct5_fv(data):
+def last_distinct4_fv(data):
     return f"""
         SELECT
             merchant_id,
@@ -272,9 +272,9 @@ def last_distinct5_fv(data):
             {data}
         """
 
-last_distinct5_fv_400h_fs = FeatureService(
-    name='last_distinct5_fv_400h_fs',
-    features=[last_distinct5_fv]
+last_distinct4_fv_400d_fs = FeatureService(
+    name='last_distinct4_fv_400d_fs',
+    features=[last_distinct4_fv]
 )
 
 
@@ -282,9 +282,9 @@ last_distinct5_fv_400h_fs = FeatureService(
     sources=[test_datasource],
     entities=[merchant, customer],
     mode='spark_sql',
-    aggregation_interval=timedelta(hours=4),
+    aggregation_interval=timedelta(hours=96),
     features=[
-        Aggregate(input_column=Field('last_col', String), function=last(100), time_window=timedelta(hours=400)),
+        Aggregate(input_column=Field('last_col', String), function=last(96), time_window=timedelta(hours=9600)),
     ],
     tecton_materialization_runtime="1.0.20",
     online=True,
@@ -293,7 +293,7 @@ last_distinct5_fv_400h_fs = FeatureService(
     timestamp_field="timestamp",
     batch_trigger=BatchTriggerType.MANUAL,  # Use manual triggers
 )
-def last100_fv(data):
+def last96_fv(data):
     return f"""
         SELECT
             merchant_id,
@@ -304,9 +304,9 @@ def last100_fv(data):
             {data}
         """
 
-last100_fv_400h_fs = FeatureService(
-    name='last100_fv_400h_fs',
-    features=[last100_fv]
+last96_fv_9600d_fs = FeatureService(
+    name='last96_fv_9600d_fs',
+    features=[last96_fv]
 )
 
 
@@ -314,9 +314,9 @@ last100_fv_400h_fs = FeatureService(
     sources=[test_datasource],
     entities=[merchant, customer],
     mode='spark_sql',
-    aggregation_interval=timedelta(hours=4),
+    aggregation_interval=timedelta(hours=96),
     features=[
-        Aggregate(input_column=Field('last_col', String), function=last_distinct(100), time_window=timedelta(hours=400)),
+        Aggregate(input_column=Field('last_col', String), function=last_distinct(96), time_window=timedelta(hours=9600)),
     ],
     tecton_materialization_runtime="1.0.20",
     online=True,
@@ -325,7 +325,7 @@ last100_fv_400h_fs = FeatureService(
     timestamp_field="timestamp",
     batch_trigger=BatchTriggerType.MANUAL,  # Use manual triggers
 )
-def last_distinct100_fv(data):
+def last_distinct96_fv(data):
     return f"""
         SELECT
             merchant_id,
@@ -336,9 +336,9 @@ def last_distinct100_fv(data):
             {data}
         """
 
-last_distinct100_fv_400h_fs = FeatureService(
-    name='last_distinct100_fv_400h_fs',
-    features=[last_distinct100_fv]
+last_distinct96_fv_9600d_fs = FeatureService(
+    name='last_distinct96_fv_9600d_fs',
+    features=[last_distinct96_fv]
 )
 
 
@@ -368,8 +368,8 @@ def last_fv(data):
             {data}
         """
 
-last_fv_400h_fs = FeatureService(
-    name='last_fv_400h_fs',
+last_fv_400d_fs = FeatureService(
+    name='last_fv_400d_fs',
     features=[last_fv]
 )
 

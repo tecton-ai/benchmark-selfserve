@@ -8,12 +8,13 @@ import requests
 
 
 URL = "https://dev-serving.tecton.ai/api/v1/feature-service/get-features"
+URL = "https://serving.us-west-2.dev-emr-vpc.tecton.ai/api/v2/workspaces/kz_test/feature-services/test_fs/get-features"
+HEADERS = {"Authorization": "Tecton-key <>"}
 
-HEADERS = {"Authorization": "Tecton-key "}
 dt = datetime(2025, 1, 1, 0, 0, 0)
 SAMPLE_PARAMS = {
     "params": {
-        "feature_service_name": "fv_mean_400h_fs",
+        "feature_service_name": "test_fs",
         "join_key_map": {
         "cust_id": str(50),
         "merchant_id": str(50),
@@ -25,6 +26,15 @@ SAMPLE_PARAMS = {
         }
     }
 }
+SAMPLE_PARAMS = {
+    "params": {
+        "feature_service_name": "test_fs",
+        "join_key_map": {
+        "ad_id": str(1),
+        },
+        "workspace_name": "kz_test",
+    }
+}
 def get_feature():
     x = requests.post(URL, json=SAMPLE_PARAMS, headers=HEADERS)
     if x.status_code != 200:
@@ -33,6 +43,7 @@ def get_feature():
             print(json.dumps(js, indent=2))
             print("\n")
         print(x.status_code)
+        print(x.text)
     else:
         print(x.text)
 if __name__ == "__main__":
